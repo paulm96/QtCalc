@@ -32,10 +32,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-color: rgb(0, 0, 0);
-background-color: rgb(210, 210, 210);
-yourWidget-&gt;setStyleSheet(&quot;border: 10px solid red&quot;);
-
+     <string notr="true">background-color: rgb(255, 255, 255);
 </string>
     </property>
     <property name="text">

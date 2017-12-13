@@ -64,6 +64,7 @@ void MainWindow::plus_pressed(){
     QPushButton *button = (QPushButton *)sender();
     comp1 = ui->label->text().toDouble();
     action = &add;
+
     ui->label->setText(button->text());
     operation = true;
 }
@@ -73,6 +74,7 @@ void MainWindow::minus_pressed(){
     QPushButton *button = (QPushButton *)sender();
     comp1 = ui->label->text().toDouble();
     action = &subtract;
+
     ui->label->setText(button->text());
     operation = true;
 }
@@ -82,6 +84,7 @@ void MainWindow::star_pressed(){
     QPushButton *button = (QPushButton *)sender();
     comp1 = ui->label->text().toDouble();
     action = &multiply;
+
     ui->label->setText(button->text());
     operation = true;
 }
@@ -91,18 +94,19 @@ void MainWindow::backslash_pressed(){
     QPushButton *button = (QPushButton *)sender();
     comp1 = ui->label->text().toDouble();
     action = &divide;
+
     ui->label->setText(button->text());
     operation = true;
 }
 
 void MainWindow::equals_pressed(){
     qDebug() << "test_equals_pressed()";
-    //QPushButton *button = (QPushButton *)sender();
-    comp2 = ui->label->text().toDouble();
 
     QString newLabel;
-    //comp1 = comp1 + comp2;
-    comp1 = action(comp1, comp2);
+
+    comp2 = ui->label->text().toDouble();   //wpisanie aktualnie wyswietlanej liczby do 'comp2'
+    comp1 = action(comp1, comp2);   //wykonanie odpowiedniego dzialania
+
     newLabel = QString::number(comp1, 'g', 15);
     ui->label->setText(newLabel);
 

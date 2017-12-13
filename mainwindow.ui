@@ -126,7 +126,7 @@ yourWidget-&gt;setStyleSheet(&quot;border: 10px solid red&quot;);
      <string>4</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_minus">
+   <widget class="QPushButton" name="pushButton_subtract">
     <property name="geometry">
      <rect>
       <x>180</x>

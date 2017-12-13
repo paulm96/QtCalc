@@ -49,10 +49,12 @@ void MainWindow::digit_pressed(){
     double number;
     QString newLabel;
 
-    if(operation){
-        ui->label->setText("0");
+    if(operation){   //jesli w pamieci jest nowa operacja
+        number = button->text().toDouble();     //to liczba jest czytana tylko z przycisku
+    } else {
+        number = (ui->label->text() + button->text()).toDouble(); //to liczba z przycisku jest dodawana do tej juz wyswietlanej
     }
-    number = (ui->label->text() + button->text()).toDouble();
+
     newLabel = QString::number(number,'g',15);
     ui->label->setText(newLabel);
     operation = false;
@@ -62,7 +64,9 @@ void MainWindow::digit_pressed(){
 void MainWindow::plus_pressed(){
     qDebug() << "test_plus_pressed()";
     QPushButton *button = (QPushButton *)sender();
-    comp1 = ui->label->text().toDouble();
+    if(!operation){   //jezeli nie ma operacji w pamieci
+        comp1 = ui->label->text().toDouble();
+    }
     action = &add;
 
     ui->label->setText(button->text());
@@ -72,7 +76,9 @@ void MainWindow::plus_pressed(){
 void MainWindow::minus_pressed(){
     qDebug() << "test_minus_pressed()";
     QPushButton *button = (QPushButton *)sender();
-    comp1 = ui->label->text().toDouble();
+    if(!operation){   //jezeli nie ma operacji w pamieci
+        comp1 = ui->label->text().toDouble();
+    }
     action = &subtract;
 
     ui->label->setText(button->text());
@@ -82,7 +88,9 @@ void MainWindow::minus_pressed(){
 void MainWindow::star_pressed(){
     qDebug() << "test_star_pressed()";
     QPushButton *button = (QPushButton *)sender();
-    comp1 = ui->label->text().toDouble();
+    if(!operation){   //jezeli nie ma operacji w pamieci
+        comp1 = ui->label->text().toDouble();
+    }
     action = &multiply;
 
     ui->label->setText(button->text());
@@ -92,7 +100,9 @@ void MainWindow::star_pressed(){
 void MainWindow::backslash_pressed(){
     qDebug() << "test_backslash_pressed()";
     QPushButton *button = (QPushButton *)sender();
-    comp1 = ui->label->text().toDouble();
+    if(!operation){   //jezeli nie ma operacji w pamieci
+        comp1 = ui->label->text().toDouble();
+    }
     action = &divide;
 
     ui->label->setText(button->text());

@@ -13,7 +13,8 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0, double comp1 = 0, double comp2 = 0,
-                        double (*action)(double, double) = 0, bool operation = false);
+                        double (*action)(double, double) = 0, bool operation = false,
+                        bool isDigitOnDisplay = false);
     ~MainWindow();
 
 private:
@@ -21,6 +22,7 @@ private:
     double comp2;
     double (*action)(double, double);
     bool operation;
+    bool isDigitOnDisplay;
     Ui::MainWindow *ui;
     double memory;
 

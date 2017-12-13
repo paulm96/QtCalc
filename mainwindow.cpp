@@ -64,6 +64,7 @@ void MainWindow::digit_pressed(){
 void MainWindow::plus_pressed(){
     qDebug() << "test_plus_pressed()";
     QPushButton *button = (QPushButton *)sender();
+
     if(!operation){   //jezeli nie ma operacji w pamieci
         comp1 = ui->label->text().toDouble();
     }

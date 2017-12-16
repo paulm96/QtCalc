@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    functions.cpp
+    functions.cpp \
+    calc.cpp
 
 HEADERS  += mainwindow.h \
-    functions.h
+    functions.h \
+    calc.h
 
 FORMS    += mainwindow.ui

@@ -12,6 +12,6 @@ double multiply(double a, double b){
     return a*b;
 }
 
-double divide(double a, double b){
+double divide(double a, double b){    //tutaj powinno wyrzucic wyjatek
     return b == 0 ? 0 : a/b;
 }

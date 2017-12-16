@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "calc.h"
 
 namespace Ui {
 class MainWindow;
@@ -12,19 +13,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0, double comp1 = 0, double comp2 = 0,
-                        double (*action)(double, double) = 0, bool operation = false,
-                        bool isDigitOnDisplay = false);
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 private:
-    double comp1;
-    double comp2;
-    double (*action)(double, double);
-    bool operation;
-    bool isDigitOnDisplay;
     Ui::MainWindow *ui;
-    double memory;
+    Calc calc;
 
 
 

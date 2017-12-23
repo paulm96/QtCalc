@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    calc.isDigitOnDisplay = true;
     connect(ui->pushButton_0, SIGNAL(released()), this, SLOT(digit_pressed()));
     connect(ui->pushButton_1, SIGNAL(released()), this, SLOT(digit_pressed()));
     connect(ui->pushButton_2, SIGNAL(released()), this, SLOT(digit_pressed()));
@@ -28,6 +28,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_multiply, SIGNAL(released()), this, SLOT(star_pressed()));
     connect(ui->pushButton_divide, SIGNAL(released()), this, SLOT(backslash_pressed()));
     connect(ui->pushButton_equals, SIGNAL(released()), this, SLOT(equals_pressed()));
+
+    connect(ui->pushButton_dot, SIGNAL(released()), this, SLOT(dot_pressed()));
+    connect(ui->pushButton_percent, SIGNAL(released()), this, SLOT(percent_pressed()));
+    connect(ui->pushButton_plusMinus, SIGNAL(released()), this, SLOT(plusMinus_pressed()));
+    connect(ui->pushButton_C, SIGNAL(released()), this, SLOT(C_pressed()));
 }
 
 MainWindow::~MainWindow()
@@ -53,6 +58,54 @@ void MainWindow::digit_pressed(){
     calc.isDigitOnDisplay = true;
 }
 
+void MainWindow::dot_pressed(){
+    qDebug() << "test_dot_pressed";
+    if(calc.isDigitOnDisplay){   //jesli na wyswietlaczu jest liczba
+        if(!(calc.isDotUsed)){
+            ui->label->setText(ui->label->text() + (QString) ".");
+            calc.isDigitOnDisplay = true;
+            calc.isDotUsed = true;
+        }
+    }
+}
+
+void MainWindow::percent_pressed(){
+    qDebug() << "test_percent_pressed()";
+    QPushButton *button = (QPushButton *)sender();
+
+    if(calc.isDigitOnDisplay){   //jezeli na ekranie jest liczba
+        calc.comp1 = ui->label->text().toDouble();
+    }
+    calc.action = &percent;
+
+    ui->label->setText(button->text());
+    calc.isDigitOnDisplay = false;
+    calc.isDotUsed = false;
+}
+
+void MainWindow::plusMinus_pressed(){
+    qDebug() << "test_plusMinus_pressed()";
+    if(calc.isDigitOnDisplay){
+        double number = ui->label->text().toDouble();
+        qDebug() << number;
+        QString newLabel;
+        calc.comp2 = number * (-1);
+
+        newLabel = QString::number(calc.comp2, 'g', 10);
+        ui->label->setText(newLabel);
+    }
+}
+
+void MainWindow::C_pressed(){
+    qDebug() << "test_C_pressed";
+    ui->label->setText("");
+    calc.isDigitOnDisplay = false;
+    calc.isDotUsed = false;
+    calc.comp1 = 0;
+    calc.comp2 = 0;
+    calc.action = 0;
+}
+
 void MainWindow::plus_pressed(){
     qDebug() << "test_plus_pressed()";
     QPushButton *button = (QPushButton *)sender();
@@ -64,6 +117,7 @@ void MainWindow::plus_pressed(){
 
     ui->label->setText(button->text());
     calc.isDigitOnDisplay = false;
+    calc.isDotUsed = false;
 }
 
 void MainWindow::minus_pressed(){
@@ -76,6 +130,7 @@ void MainWindow::minus_pressed(){
 
     ui->label->setText(button->text());
     calc.isDigitOnDisplay = false;
+    calc.isDotUsed = false;
 }
 
 void MainWindow::star_pressed(){
@@ -88,6 +143,7 @@ void MainWindow::star_pressed(){
 
     ui->label->setText(button->text());
     calc.isDigitOnDisplay = false;
+    calc.isDotUsed = false;
 }
 
 void MainWindow::backslash_pressed(){
@@ -101,13 +157,14 @@ void MainWindow::backslash_pressed(){
 
     ui->label->setText(button->text());
     calc.isDigitOnDisplay = false;
+    calc.isDotUsed = false;
 }
 
 void MainWindow::equals_pressed(){
     //QPushButton *but = new QPushButton(ui->widget);   //tak stworzylem dynamicznie widget
 //    but->show();                                      //
-    QPushButton *but = new QPushButton(this->centralWidget());
-    but->setVisible(true);
+   // QPushButton *but = new QPushButton(this->centralWidget());
+   // but->setVisible(true);
 
     qDebug() << "test_equals_pressed()";
     QString newLabel;
@@ -117,6 +174,7 @@ void MainWindow::equals_pressed(){
             calc.comp1 = calc.action(calc.comp1, calc.comp2);   //wykonanie odpowiedniego dzialania
             newLabel = QString::number(calc.comp1, 'g', 10);
             ui->label->setText(newLabel);
+            calc.isDotUsed = false;
         }
     }
 }

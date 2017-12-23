@@ -29,6 +29,10 @@ private slots:
     void star_pressed();
     void backslash_pressed();
     void equals_pressed();
+    void dot_pressed();
+    void C_pressed();
+    void plusMinus_pressed();
+    void percent_pressed();
 
 };
 
